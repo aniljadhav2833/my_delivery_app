@@ -1,0 +1,1 @@
+enum RateType { my, others }
