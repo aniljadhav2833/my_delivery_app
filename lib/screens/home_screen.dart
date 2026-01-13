@@ -10,6 +10,9 @@ import 'package:my_delivery/screens/total_earnings.dart';
 import 'package:my_delivery/screens/widgets/dashboard.dart';
 import 'package:my_delivery/screens/widgets/navigation_button.dart';
 
+import '../backup/auto_backup_service.dart';
+import '../backup/encrypted_backup.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -18,6 +21,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AutoBackupService.runDailyBackup();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +46,24 @@ class _HomeScreen extends State<HomeScreen> {
           NavigationButton(title: "View Reports", screen: ReportScreen()),
           NavigationButton(title: "IDs Management", screen: IDsManagement()),
           SecuritySettings(),
+          ElevatedButton(
+            onPressed: () async {
+              await EncryptedBackup.createBackup();
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Backup created')));
+            },
+            child: const Text('Backup'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await EncryptedBackup.restoreLatestBackup();
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Restore done')));
+            },
+            child: const Text('Restore'),
+          ),
         ],
       ),
     );
