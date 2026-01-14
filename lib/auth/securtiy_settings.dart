@@ -26,6 +26,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
 
   Future<void> _toggle(bool value) async {
     if (value) {
+      print(value);
       final success = await BiometricService().authenticate();
       if (!success) return;
       await BiometricPref.enable();
