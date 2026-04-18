@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_delivery/screens/report/my_report.dart';
+import 'package:my_delivery/screens/report/office_report.dart';
 import 'package:my_delivery/screens/report/other_report.dart';
+import 'package:my_delivery/screens/report/other_report_all.dart';
 import 'package:my_delivery/screens/widgets/navigation_button.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -30,7 +32,15 @@ class _ReportScreen extends State<ReportScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           NavigationButton(title: "My Report", screen: MyReport()),
-          NavigationButton(title: "Others Reports", screen: OtherReport()),
+          NavigationButton(
+            title: "Others Reports Individual",
+            screen: OtherReport(),
+          ),
+          NavigationButton(
+            title: "Others Reports All",
+            screen: OtherReportAll(),
+          ),
+          NavigationButton(title: "Office Report", screen: OfficeReport()),
         ],
       ),
     );
